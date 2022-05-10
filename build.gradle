@@ -32,6 +32,9 @@ dependencies {
     // Cucumber
     testImplementation 'io.cucumber:cucumber-java:7.3.4'
     testImplementation 'io.cucumber:cucumber-junit:7.3.4'
+    testImplementation group: 'de.monochromata.cucumber', name: 'reporting-plugin', version: '4.0.102'
+
+
 }
 
 task cucumber() {
@@ -41,7 +44,7 @@ task cucumber() {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = ['--plugin', 'pretty',
-                    '--plugin', 'html:target/cucumber-reports.html',
+                    '--plugin', 'de.monochromata.cucumber.report.PrettyReports:target/cucumber',
                     '--glue', 'nz.ac.auckland.se754.democucumber', // package of the step definitions (java files)
                     'src/test/resources/features'] // where the features file are located (feature files)
         }
